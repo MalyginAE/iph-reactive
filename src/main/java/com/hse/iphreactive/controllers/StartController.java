@@ -1,6 +1,7 @@
 package com.hse.iphreactive.controllers;
 
 import com.hse.iphreactive.services.CustomerService;
+import com.hse.iphreactive.services.ImageService;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -38,6 +39,7 @@ public class StartController {
     public static final Path basePath = Paths.get("C:\\Users\\Public\\temp");//to config
 
     private final CustomerService service;
+    private final ImageService imageService;
 
 
 
@@ -46,7 +48,7 @@ public class StartController {
     public RouterFunction<ServerResponse> imageController() {
         return RouterFunctions.route()
                 .POST("/customer", service::saveCustomerData)
-                .GET("/image", this::getImage)
+                .GET("/image/{id}", imageService::getAnalyzingBlueImage)
                 .build();
     }
 

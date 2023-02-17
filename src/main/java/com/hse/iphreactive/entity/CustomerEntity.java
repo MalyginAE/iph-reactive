@@ -1,5 +1,6 @@
 package com.hse.iphreactive.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,19 +11,22 @@ import org.springframework.data.domain.Persistable;
 import org.springframework.data.relational.core.mapping.Table;
 
 import java.util.Objects;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
 @Table("customer")
 public class CustomerEntity implements Persistable {
     @Id
-    private  Long id;
-    private String uri;
+    private Long id;
+    private String uri;//rename to path
     private String customerName;
     @Transient
+    @JsonIgnore
     private boolean newProduct;
 
     @Override
+    @JsonIgnore
     @Transient
     public boolean isNew() {
         return this.newProduct || id == null;

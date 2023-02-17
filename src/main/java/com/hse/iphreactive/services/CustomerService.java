@@ -29,7 +29,7 @@ public class CustomerService {
                     var destPath = basePath.resolve(file.filename());
                     file.transferTo(destPath).subscribe();
 
-                    CustomerEntity andrey = new CustomerEntity(destPath.toUri().toString(), "Andrey");
+                    CustomerEntity andrey = new CustomerEntity(destPath.toString(), "Andrey");
 
                     return repository.save(andrey).log()
                             .flatMap(it -> Mono.just(
